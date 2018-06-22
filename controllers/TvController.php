@@ -18,6 +18,7 @@ use yii\data\Pagination;
 
 class TvController extends Controller
 {
+    public $layout = 'common';
     public function actionIndex() {
 
         //类型
@@ -28,6 +29,27 @@ class TvController extends Controller
         $year = Years::find()->all();
         //电影
         $tv = Tv::find()->with();
+
+
+//123
+
+        $data = $typeId = \Yii::$app->request->get();
+
+        if(count($data)>1) {
+            unset($data['r']);
+            foreach ($data as $key=>$v) {
+                $var[$key] =$v;
+            }
+
+            unset($var['page'],$var['per-page']);
+            $tv = Tv::find()->where($var)->with();
+
+        }else{
+            $tv = Tv::find()->with();
+        }
+
+
+
 
 //分页
         $pagination = new Pagination([
@@ -42,7 +64,8 @@ class TvController extends Controller
             'area'=>$area,
             'year'=>$year,
             'tv'=>$data,
-            'pagination'=>$pagination
+            'pagination'=>$pagination,
+            'params' => \Yii::$app->request->get(),
         ]);
     }
 }

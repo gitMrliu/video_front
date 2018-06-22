@@ -14,4 +14,12 @@ use yii\db\ActiveRecord;
 class Novel extends ActiveRecord
 {
 
+    /**
+     * @desc 获取查询url
+     * @param $params
+     * @param string $exceptKey
+     * @return string
+     *
+     */
+
 }

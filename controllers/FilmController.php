@@ -19,7 +19,7 @@ use yii\data\Pagination;
 class FilmController extends Controller
 {
 
-//    public $layout = 'common';
+    public $layout = 'common';
     public function actionIndex() {
         //类型
         $type = Type::find()->all();
@@ -29,13 +29,20 @@ class FilmController extends Controller
         $year = Years::find()->all();
         //电影
         $film = Film::find()->with();
+        //电影数
+        $filmco = Film::find()->with()->count();
 
 //分页
         $pagination = new Pagination([
-            'defaultPageSize' => 3,
+            'pageSize' => 3,
             'totalCount' => $film->count(),
         ]);
         $data = $film->offset($pagination->offset)->limit($pagination->limit)->all();
+
+
+//        if(empty($_GET['page'])){
+//
+//        }
 
 
         return $this->render('index',[
@@ -43,7 +50,8 @@ class FilmController extends Controller
             'area'=>$area,
             'year'=>$year,
             'film'=>$data,
-            'pagination'=>$pagination
+            'pagination'=>$pagination,
+            'filmco'=>$filmco
         ]);
     }
 }

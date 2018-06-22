@@ -40,5 +40,6 @@ class ComController extends Controller
         $arr = \Yii::$app->request->get('id');
         \Yii::$app->db->createCommand()->delete('com','id='.$arr)->execute();
         $this->redirect(Url::to(['index']));
+
     }
 }

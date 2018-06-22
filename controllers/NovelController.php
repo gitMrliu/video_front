@@ -19,6 +19,7 @@ use yii\data\Pagination;
 
 class NovelController extends Controller
 {
+    public $layout = 'common';
     public function actionIndex() {
 
         //类型
@@ -36,6 +37,7 @@ class NovelController extends Controller
             'totalCount' => $novel->count(),
         ]);
         $data = $novel->offset($pagination->offset)->limit($pagination->limit)->all();
+
 
 
         return $this->render('index',[
